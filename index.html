@@ -111,23 +111,24 @@
 
 <script>
 const products = [
-  {"name": "G13", "image": "photo-g13.jpg", "video": "video_g13.mp4", "prices": "2.7g → 30€, 5g → 50€, 10g → 80€"},
-  {"name": "Jaune mousseux", "image": "photo-mousseux.jpg", "video": "video_mousseux.mp4", "prices": "5g → 30€, 10g → 50€, 20g → 100€"},
-  {"name": "Frozen", "image": "photo-filtrer.jpg", "video": "video_filter.mp4", "prices": "4g → 50€, 10g → 100€"},
-  {"name": "Taz Rolex", "image": "taz-photo.jpg", "video": "taz_video.mp4", "prices": "5 taz → 30€, 10 taz → 50€"},
-  {"name": "Gelato", "image": "photo-gelato.jpg", "video": "video_gelaro.mp4", "prices": "1.8g → 30€, 4g → 50€, 10g → 100€"},
-  {"name": "Mochi", "image": "photo-mochi.jpg", "video": "video_mochi.mp4", "prices": "1.8g → 30€, 4g → 50€, 10g → 100€"},
-  {"name": "Ice cream Cake", "image": "photo-cream.jpg", "video": "video_cream.mp4", "prices": "2g → 50€, 4g → 100€, 10g → 200€, 20g → 380€"},
-  {"name": "Z41", "image": "photo-z41.jpg", "video": "video_z41.mp4", "prices": "3g → 50€, 7g → 100€, 16g → 200€, 50g → 600€"},
-  {"name": "White gobb stopper", "image": "photo-white.jpg", "video": "video_white.mp4", "prices": "3g → 50€, 7g → 100€, 16g → 200€, 50g → 600€"}];
-  {"name": "Coke", "image": "photo-coke.jpg", "video": "video_coke.mp4", "prices": "0.50g → 40€, 1g → 70€, 16g"}];
+  { "name": "G13", "image": "photo-g13.jpg", "video": "video_g13.mp4", "prices": "2.7g → 30€, 5g → 50€, 10g → 80€" },
+  { "name": "Jaune mousseux", "image": "photo-mousseux.jpg", "video": "video_mousseux.mp4", "prices": "5g → 30€, 10g → 50€, 20g → 100€" },
+  { "name": "Frozen", "image": "photo-filtrer.jpg", "video": "video_filter.mp4", "prices": "4g → 50€, 10g → 100€" },
+  { "name": "Taz Rolex", "image": "taz-photo.jpg", "video": "taz_video.mp4", "prices": "5 taz → 30€, 10 taz → 50€" },
+  { "name": "Gelato", "image": "photo-gelato.jpg", "video": "video_gelaro.mp4", "prices": "1.8g → 30€, 4g → 50€, 10g → 100€" },
+  { "name": "Mochi", "image": "photo-mochi.jpg", "video": "video_mochi.mp4", "prices": "1.8g → 30€, 4g → 50€, 10g → 100€" },
+  { "name": "Ice cream Cake", "image": "photo-cream.jpg", "video": "video_cream.mp4", "prices": "2g → 50€, 4g → 100€, 10g → 200€, 20g → 380€" },
+  { "name": "Z41", "image": "photo-z41.jpg", "video": "video_z41.mp4", "prices": "3g → 50€, 7g → 100€, 16g → 200€, 50g → 600€" },
+  { "name": "White gobb stopper", "image": "photo-white.jpg", "video": "video_white.mp4", "prices": "3g → 50€, 7g → 100€, 16g → 200€, 50g → 600€" },
+  { "name": "Coke", "image": "photo-coke.jpg", "video": "video_coke.mp4", "prices": "0.50g → 40€, 1g → 70€, 16g → 1000€" }
+];
 
 let selectedProduct = null;
 let selectedPrice = "";
 
 function goTo(section) {
   document.getElementById('product-detail').style.display = 'none';
-  if(section === 'infos') {
+  if (section === 'infos') {
     document.querySelector('.products-grid').style.display = 'none';
     document.getElementById('infos').style.display = 'block';
   } else {
@@ -141,20 +142,20 @@ function showDetail(index) {
   document.getElementById('detail-name').innerText = selectedProduct.name;
   document.getElementById('detail-image').src = selectedProduct.image;
   document.getElementById('detail-video').src = selectedProduct.video;
-  
+
   document.getElementById('detail-image').classList.add('active');
   document.getElementById('detail-video').classList.remove('active');
   document.getElementById('detail-video').pause();
-  
+
   const priceOptions = document.getElementById('price-options');
   priceOptions.innerHTML = '';
-  
+
   const prices = selectedProduct.prices.split(', ');
   prices.forEach(price => {
     const option = document.createElement('div');
     option.className = 'price-option';
     option.innerText = price.replace('→', '').trim();
-    option.onclick = function() {
+    option.onclick = function () {
       document.querySelectorAll('.price-option').forEach(el => {
         el.classList.remove('selected');
       });
@@ -164,7 +165,7 @@ function showDetail(index) {
     };
     priceOptions.appendChild(option);
   });
-  
+
   document.getElementById('product-detail').style.display = 'block';
   document.querySelector('.products-grid').style.display = 'none';
   document.getElementById('infos').style.display = 'none';
@@ -174,7 +175,7 @@ function showDetail(index) {
 function switchMedia(type) {
   const image = document.getElementById('detail-image');
   const video = document.getElementById('detail-video');
-  
+
   if (type === 'image') {
     image.classList.add('active');
     video.classList.remove('active');
@@ -204,5 +205,3 @@ function hideDetail() {
   selectedPrice = "";
 }
 </script>
-</body>
-</html>
