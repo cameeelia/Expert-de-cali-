@@ -31,67 +31,49 @@
   </div>
 
   <div class="products-grid">
-  <!-- 1. Jaune mousseux -->
-  <div class="product" onclick="showDetail(0)">
-    <img src="photo-mousseux.jpg" alt="Jaune mousseux" />
-    <h3>Jaune mousseux🧽</h3>
+    <div class="product" onclick="showDetail(0)">
+      <img src="photo-mousseux.jpg" alt="Jaune mousseux" />
+      <h3>Jaune mousseux🧽</h3>
+    </div>
+    <div class="product" onclick="showDetail(1)">
+      <img src="photo-filtrer.jpg" alt="Filtrer X3 (Frozen" />
+      <h3>Filtrer X3 (Frozen) 🧽 </h3>
+    </div>
+    <div class="product" onclick="showDetail(2)">
+      <img src="taz-photo.jpg" alt="Taz Rolex" />
+      <h3>Taz Rolex🍬</h3>
+    </div>
+    <div class="product" onclick="showDetail(3)">
+      <img src="photo-coke.jpg" alt="Coke" />
+      <h3>Coke❄️</h3>
+    </div>
+    <div class="product" onclick="showDetail(4)">
+      <img src="photo-g13.jpg" alt="G13" />
+      <h3>G13🍃</h3>
+    </div>
+    <div class="product" onclick="showDetail(5)">
+      <img src="photo-mochi.jpg" alt="Mochi" />
+      <h3>Mochi ❌Rupture de stock❌</h3>
+    </div>
+    <div class="product" onclick="showDetail(6)">
+      <img src="photo-gelato.jpg" alt="Gelato" />
+      <h3>Gelato🍃</h3>
+    </div>
+    <div class="product" onclick="showDetail(7)">
+      <img src="photo-cream.jpg" alt="Ice cream cake" />
+      <h3>Ice cream cake🍃</h3>
+    </div>
+    <div class="product" onclick="showDetail(8)">
+      <img src="photo-white.jpg" alt="White gobb stopper" />
+      <h3>White gobb stopper🍃</h3>
+    </div>
+    <div class="product" onclick="showDetail(9)">
+      <img src="photo-z41.jpg" alt="Z41" />
+      <h3>Z41🍃</h3>
+    </div>
   </div>
 
-  <!-- 2. Filtrer X3 -->
-  <div class="product" onclick="showDetail(1)">
-    <img src="photo-filtrer.jpg" alt="Filtrer X3 (Frozen" />
-    <h3>Filtrer X3 (Frozen) 🧽 </h3>
-  </div>
-
-  <!-- 3. Taz Rolex -->
-  <div class="product" onclick="showDetail(2)">
-    <img src="taz-photo.jpg" alt="Taz Rolex" />
-    <h3>Taz Rolex🍬</h3>
-  </div>
-
-  <!-- 4. Coke -->
-  <div class="product" onclick="showDetail(3)">
-    <img src="photo-coke.jpg" alt="Coke" />
-    <h3>Coke❄️</h3>
-  </div>
-
-  <!-- 5. G13 -->
-  <div class="product" onclick="showDetail(4)">
-    <img src="photo-g13.jpg" alt="G13" />
-    <h3>G13🍃</h3>
-  </div>
-
-  <!-- 6. Mochi -->
-  <div class="product" onclick="showDetail(6)">
-    <img src="photo-mochi.jpg" alt="Mochi" />
-    <h3>Mochi ❌Rupture de stock❌</h3>
-  </div>
-
-  <!-- 7. Gelato -->
-  <div class="product" onclick="showDetail(5)">
-    <img src="photo-gelato.jpg" alt="Gelato" />
-    <h3>Gelato🍃</h3>
-  </div>
-
-  <!-- 8. Ice cream cake -->
-  <div class="product" onclick="showDetail(7)">
-    <img src="photo-cream.jpg" alt="Ice cream cake" />
-    <h3>Ice cream cake🍃</h3>
-  </div>
-
-  <!-- 9. White gobb stopper -->
-  <div class="product" onclick="showDetail(9)">
-    <img src="photo-white.jpg" alt="White gobb stopper" />
-    <h3>White gobb stopper🍃</h3>
-  </div>
-
-  <!-- 10. Z41 -->
-  <div class="product" onclick="showDetail(8)">
-    <img src="photo-z41.jpg" alt="Z41" />
-    <h3>Z41🍃</h3>
-  </div>
-</div>
-  <div id="product-detail" class="product-detail">
+  <div id="product-detail" class="product-detail" style="display:none;">
     <h2 id="detail-name"></h2>
     <div class="media-carousel">
       <img id="detail-image" src="" alt="" class="active"/>
@@ -128,16 +110,16 @@
 
 <script>
 const products = [
-  { "name": "G13", "image": "photo-g13.jpg", "video": "video_g13.mp4", "prices": "2.7g → 30€, 5g → 50€, 10g → 80€" },
-  { "name": "Jaune mousseux", "image": "photo-mousseux.jpg", "video": "video_mousseux.mp4", "prices": "5g → 30€, 10g → 50€, 20g → 100€" },
-  { "name": "Filtrer X3 (Frozen)", "image": "photo-filtrer.jpg", "video": "video_filter.mp4", "prices": "4g → 50€, 10g → 90€, 20g → 160€" },
-  { "name": "Taz Rolex", "image": "taz-photo.jpg", "video": "taz_video.mp4", "prices": "5 taz → 30€, 10 taz → 50€" },
-  { "name": "Gelato", "image": "photo-gelato.jpg", "video": "video_gelaro.mp4", "prices": "1.8g → 30€, 4g → 50€, 10g → 100€" },
-  { "name": "Mochi", "image": "photo-mochi.jpg", "video": "video_mochi.mp4", "prices": "1.8g → 30€, 4g → 50€, 10g → 100€" },
-  { "name": "Ice cream Cake", "image": "photo-cream.jpg", "video": "video_cream.mp4", "prices": "2g → 50€, 4g → 100€, 10g → 200€, 20g → 380€" },
-  { "name": "Z41", "image": "photo-z41.jpg", "video": "video_z41.mp4", "prices": "3g → 50€, 7g → 100€, 16g → 200€, 50g → 600€" },
-  { "name": "White gobb stopper", "image": "photo-white.jpg", "video": "video_white.mp4", "prices": "3g → 50€, 7g → 100€, 16g → 200€, 50g → 600€" },
-  { "name": "Coke", "image": "photo-coke.jpg", "video": "video_coke.mp4", "prices": "0.50g → 40€, 1g → 70€, 2g → 130€" }
+  { name: "Jaune mousseux", image: "photo-mousseux.jpg", video: "video_mousseux.mp4", prices: "5g → 30€, 10g → 50€, 20g → 100€" },
+  { name: "Filtrer X3 (Frozen)", image: "photo-filtrer.jpg", video: "video_filter.mp4", prices: "4g → 50€, 10g → 90€, 20g → 160€" },
+  { name: "Taz Rolex", image: "taz-photo.jpg", video: "taz_video.mp4", prices: "5 taz → 30€, 10 taz → 50€" },
+  { name: "Coke", image: "photo-coke.jpg", video: "video_coke.mp4", prices: "0.50g → 40€, 1g → 70€, 2g → 130€" },
+  { name: "G13", image: "photo-g13.jpg", video: "video_g13.mp4", prices: "2.7g → 30€, 5g → 50€, 10g → 80€" },
+  { name: "Mochi", image: "photo-mochi.jpg", video: "video_mochi.mp4", prices: "1.8g → 30€, 4g → 50€, 10g → 100€" },
+  { name: "Gelato", image: "photo-gelato.jpg", video: "video_gelaro.mp4", prices: "1.8g → 30€, 4g → 50€, 10g → 100€" },
+  { name: "Ice cream Cake", image: "photo-cream.jpg", video: "video_cream.mp4", prices: "2g → 50€, 4g → 100€, 10g → 200€, 20g → 380€" },
+  { name: "White gobb stopper", image: "photo-white.jpg", video: "video_white.mp4", prices: "3g → 50€, 7g → 100€, 16g → 200€, 50g → 600€" },
+  { name: "Z41", image: "photo-z41.jpg", video: "video_z41.mp4", prices: "3g → 50€, 7g → 100€, 16g → 200€, 50g → 600€" }
 ];
 
 let selectedProduct = null;
@@ -222,3 +204,5 @@ function hideDetail() {
   selectedPrice = "";
 }
 </script>
+</body>
+</html>
