@@ -23,6 +23,12 @@
       width: 20px;
       height: 20px;
     }
+    .price-option.selected {
+      background-color: yellow;
+      font-weight: bold;
+      border-radius: 5px;
+      padding: 5px;
+    }
   </style>
 </head>
 <body>
@@ -32,42 +38,46 @@
 
   <div class="products-grid">
     <div class="product" onclick="showDetail(0)">
+      <img src="photo-promo.jpg" alt="Pack promo" />
+      <h3>🔥 Pack Promo 🔥</h3>
+    </div>
+    <div class="product" onclick="showDetail(1)">
       <img src="photo-mousseux.jpg" alt="Jaune mousseux" />
       <h3>Jaune mousseux🧽</h3>
     </div>
-    <div class="product" onclick="showDetail(1)">
-      <img src="photo-filtrer.jpg" alt="Filtrer X3 (Frozen" />
+    <div class="product" onclick="showDetail(2)">
+      <img src="photo-filtrer.jpg" alt="Filtrer X3 (Frozen)" />
       <h3>Filtrer X3 (Frozen) 🧽 </h3>
     </div>
-    <div class="product" onclick="showDetail(2)">
+    <div class="product" onclick="showDetail(3)">
       <img src="taz-photo.jpg" alt="Taz Rolex" />
       <h3>Taz Rolex🍬</h3>
     </div>
-    <div class="product" onclick="showDetail(3)">
+    <div class="product" onclick="showDetail(4)">
       <img src="photo-coke.jpg" alt="Coke" />
       <h3>Coke❄️</h3>
     </div>
-    <div class="product" onclick="showDetail(4)">
-      <img src="photo-g13.jpg" alt="G13" />
-      <h3>G13🍃</h3>
-    </div>
     <div class="product" onclick="showDetail(5)">
-      <img src="photo-mochi.jpg" alt="Mochi" />
-      <h3>Mochi ❌Rupture de stock❌</h3>
+      <img src="photo-g13.jpg" alt="G13" />
+      <h3>G13🍃❌Rupture de stock❌ </h3>
     </div>
     <div class="product" onclick="showDetail(6)">
-      <img src="photo-gelato.jpg" alt="Gelato" />
-      <h3>Gelato🍃</h3>
+      <img src="photo-mochi.jpg" alt="Mochi" />
+      <h3>Mochi 🍃❌Rupture de stock❌</h3>
     </div>
     <div class="product" onclick="showDetail(7)">
+      <img src="photo-gelato.jpg" alt="Gelato" />
+      <h3>Gelato🍃❌Rupture de stock❌ </h3>
+    </div>
+    <div class="product" onclick="showDetail(8)">
       <img src="photo-cream.jpg" alt="Ice cream cake" />
       <h3>Ice cream cake🍃</h3>
     </div>
-    <div class="product" onclick="showDetail(8)">
+    <div class="product" onclick="showDetail(9)">
       <img src="photo-white.jpg" alt="White gobb stopper" />
       <h3>White gobb stopper🍃</h3>
     </div>
-    <div class="product" onclick="showDetail(9)">
+    <div class="product" onclick="showDetail(10)">
       <img src="photo-z41.jpg" alt="Z41" />
       <h3>Z41🍃</h3>
     </div>
@@ -75,14 +85,8 @@
 
   <div id="product-detail" class="product-detail" style="display:none;">
     <h2 id="detail-name"></h2>
-    <div class="media-carousel">
-      <img id="detail-image" src="" alt="" class="active"/>
-      <video id="detail-video" controls></video>
-      <div class="carousel-controls">
-        <button onclick="switchMedia('image')">Image</button>
-        <button onclick="switchMedia('video')">Vidéo</button>
-      </div>
-    </div>
+    <img id="detail-image" src="" alt="" class="active" style="max-width:100%; border-radius:10px; margin-bottom:10px;"/>
+    <div id="promo-description" style="display:none; margin-bottom:10px; background:#fdf5c4; padding:10px; border-radius:8px;"></div>
     <div id="price-options" class="price-options"></div>
 
     <a id="snapchat-link" href="https://www.snapchat.com/add/cesar.cj3" class="snap-btn">
@@ -110,16 +114,22 @@
 
 <script>
 const products = [
-  { name: "Jaune mousseux", image: "photo-mousseux.jpg", video: "video_mousseux.mp4", prices: "5g → 30€, 10g → 50€, 20g → 100€" },
-  { name: "Filtrer X3 (Frozen)", image: "photo-filtrer.jpg", video: "video_filter.mp4", prices: "4g → 50€, 10g → 90€, 20g → 160€" },
-  { name: "Taz Rolex", image: "taz-photo.jpg", video: "taz_video.mp4", prices: "5 taz → 30€, 10 taz → 50€" },
-  { name: "Coke", image: "photo-coke.jpg", video: "video_coke.mp4", prices: "0.50g → 40€, 1g → 70€, 2g → 130€" },
-  { name: "G13", image: "photo-g13.jpg", video: "video_g13.mp4", prices: "2.7g → 30€, 5g → 50€, 10g → 80€" },
-  { name: "Mochi", image: "photo-mochi.jpg", video: "video_mochi.mp4", prices: "1.8g → 30€, 4g → 50€, 10g → 100€" },
-  { name: "Gelato", image: "photo-gelato.jpg", video: "video_gelaro.mp4", prices: "1.8g → 30€, 4g → 50€, 10g → 100€" },
-  { name: "Ice cream Cake", image: "photo-cream.jpg", video: "video_cream.mp4", prices: "2g → 50€, 4g → 100€, 10g → 200€, 20g → 380€" },
-  { name: "White gobb stopper", image: "photo-white.jpg", video: "video_white.mp4", prices: "3g → 50€, 7g → 100€, 16g → 200€, 50g → 600€" },
-  { name: "Z41", image: "photo-z41.jpg", video: "video_z41.mp4", prices: "3g → 50€, 7g → 100€, 16g → 200€, 50g → 600€" }
+  {
+    name: "🔥 Pack Promo 🔥",
+    image: "photo-promo.jpg",
+    prices: "6g + 1.5g → 60€, 10g + 4g + 1.5g → 100€, 10g + 5g + 3g + 2g → 150€",
+    promo: true
+  },
+  { name: "Jaune mousseux", image: "photo-mousseux.jpg", prices: "5g → 30€, 10g → 50€, 20g → 100€" },
+  { name: "Filtrer X3 (Frozen)", image: "photo-filtrer.jpg", prices: "4g → 50€, 10g → 90€, 20g → 160€" },
+  { name: "Taz Rolex", image: "taz-photo.jpg", prices: "5 taz → 30€, 10 taz → 50€" },
+  { name: "Coke", image: "photo-coke.jpg", prices: "0.50g → 40€, 1g → 70€, 2g → 130€" },
+  { name: "G13", image: "photo-g13.jpg", prices: "2.7g → 30€, 5g → 50€, 10g → 80€" },
+  { name: "Mochi", image: "photo-mochi.jpg", prices: "1.8g → 30€, 4g → 50€, 10g → 100€" },
+  { name: "Gelato", image: "photo-gelato.jpg", prices: "1.8g → 30€, 4g → 50€, 10g → 100€" },
+  { name: "Ice cream Cake", image: "photo-cream.jpg", prices: "2g → 50€, 4g → 100€, 10g → 200€, 20g → 380€" },
+  { name: "White gobb stopper", image: "photo-white.jpg", prices: "3g → 50€, 7g → 100€, 16g → 200€, 50g → 600€" },
+  { name: "Z41", image: "photo-z41.jpg", prices: "3g → 50€, 7g → 100€, 16g → 200€, 50g → 600€" }
 ];
 
 let selectedProduct = null;
@@ -140,11 +150,16 @@ function showDetail(index) {
   selectedProduct = products[index];
   document.getElementById('detail-name').innerText = selectedProduct.name;
   document.getElementById('detail-image').src = selectedProduct.image;
-  document.getElementById('detail-video').src = selectedProduct.video;
 
-  document.getElementById('detail-image').classList.add('active');
-  document.getElementById('detail-video').classList.remove('active');
-  document.getElementById('detail-video').pause();
+  // Promo description
+  const promoBox = document.getElementById('promo-description');
+  if (selectedProduct.promo) {
+    promoBox.style.display = 'block';
+    promoBox.innerHTML = "🎉 <strong>Offre spéciale valable jusqu’au 6 août !</strong><br>Profitez de packs ultra avantageux pour faire le plein à petit prix 💸🔥<br>Quantités limitées, ne rate pas ça.";
+  } else {
+    promoBox.style.display = 'none';
+    promoBox.innerHTML = '';
+  }
 
   const priceOptions = document.getElementById('price-options');
   priceOptions.innerHTML = '';
@@ -171,29 +186,11 @@ function showDetail(index) {
   updateSnapchatLink();
 }
 
-function switchMedia(type) {
-  const image = document.getElementById('detail-image');
-  const video = document.getElementById('detail-video');
-
-  if (type === 'image') {
-    image.classList.add('active');
-    video.classList.remove('active');
-    video.pause();
-  } else {
-    image.classList.remove('active');
-    video.classList.add('active');
-    video.play();
-  }
-}
-
 function updateSnapchatLink() {
   const link = document.getElementById('snapchat-link');
   if (selectedProduct && selectedPrice) {
-    const message = `Je souhaite commander: ${selectedProduct.name} - ${selectedPrice}`;
-    link.href = "https://www.snapchat.com/add/cesar.cj3";
     link.innerText = `Commander via Snapchat (${selectedPrice})`;
   } else {
-    link.href = "https://www.snapchat.com/add/cesar.cj3";
     link.innerText = "Commander via Snapchat";
   }
 }
