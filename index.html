@@ -5,74 +5,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Les Experts d'la Cali’t</title>
   <link rel="stylesheet" href="style.css"/>
-  <style>
-    .snap-btn {
-      background-color: yellow;
-      color: black;
-      padding: 10px 20px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-weight: bold;
-      text-decoration: none;
-      border-radius: 8px;
-      margin-top: 10px;
-    }
-    .snap-btn img {
-      width: 20px;
-      height: 20px;
-    }
-    .price-option.selected {
-      background-color: yellow;
-      font-weight: bold;
-      border-radius: 5px;
-      padding: 5px;
-    }
-  </style>
 </head>
 <body>
   <div class="header">
     <img src="logo.jpg" alt="Logo" class="logo" />
   </div>
 
-    <div class="product" onclick="showDetail(1)">
+  <div class="products-grid">
+    <div class="product" onclick="showDetail(0)">
       <img src="photo-mousseux.jpg" alt="Jaune mousseux" />
       <h3>Jaune mousseux🧽</h3>
     </div>
-    <div class="product" onclick="showDetail(2)">
+    <div class="product" onclick="showDetail(1)">
       <img src="photo-filtrer.jpg" alt="Filtrer X3 (Frozen)" />
       <h3>Filtrer X3 (Frozen) 🧽 </h3>
     </div>
-    <div class="product" onclick="showDetail(3)">
+    <div class="product" onclick="showDetail(2)">
       <img src="taz-photo.jpg" alt="Taz Rolex" />
       <h3>Taz Rolex🍬</h3>
     </div>
-    <div class="product" onclick="showDetail(4)">
+    <div class="product" onclick="showDetail(3)">
       <img src="photo-coke.jpg" alt="Coke" />
       <h3>Coke❄️</h3>
     </div>
-    <div class="product" onclick="showDetail(5)">
+    <div class="product" onclick="showDetail(4)">
       <img src="photo-g13.jpg" alt="G13" />
       <h3>G13🍃❌Rupture de stock❌ </h3>
     </div>
-    <div class="product" onclick="showDetail(6)">
+    <div class="product" onclick="showDetail(5)">
       <img src="photo-mochi.jpg" alt="Mochi" />
       <h3>Mochi 🍃❌Rupture de stock❌</h3>
     </div>
-    <div class="product" onclick="showDetail(7)">
+    <div class="product" onclick="showDetail(6)">
       <img src="photo-gelato.jpg" alt="Gelato" />
       <h3>Gelato🍃❌Rupture de stock❌ </h3>
     </div>
-    <div class="product" onclick="showDetail(8)">
+    <div class="product" onclick="showDetail(7)">
       <img src="photo-cream.jpg" alt="Ice cream cake" />
       <h3>Ice cream cake🍃</h3>
     </div>
-    <div class="product" onclick="showDetail(9)">
+    <div class="product" onclick="showDetail(8)">
       <img src="photo-white.jpg" alt="White gobb stopper" />
       <h3>White gobb stopper🍃</h3>
     </div>
-    <div class="product" onclick="showDetail(10)">
+    <div class="product" onclick="showDetail(9)">
       <img src="photo-z41.jpg" alt="Z41" />
       <h3>Z41🍃</h3>
     </div>
@@ -80,8 +56,16 @@
 
   <div id="product-detail" class="product-detail" style="display:none;">
     <h2 id="detail-name"></h2>
-    <img id="detail-image" src="" alt="" class="active" style="max-width:100%; border-radius:10px; margin-bottom:10px;"/>
-    <div id="promo-description" style="display:none; margin-bottom:10px; background:#f5f5f5; padding:12px; border-radius:8px; color:#333;"></div>
+
+    <!-- Vidéo -->
+    <video id="detail-video" controls>
+      <source id="video-source" src="" type="video/mp4">
+      Votre navigateur ne supporte pas la vidéo.
+    </video>
+
+    <!-- Image -->
+    <img id="detail-image" src="" alt="Produit" />
+
     <div id="price-options" class="price-options"></div>
 
     <a id="snapchat-link" href="https://www.snapchat.com/add/cesar.cj3" class="snap-btn">
@@ -109,7 +93,7 @@
 
 <script>
 const products = [
- { name: "Jaune mousseux", image: "photo-mousseux.jpg", video: "video_mousseux.mp4", prices: "5g → 30€, 10g → 50€, 20g → 100€" },
+  { name: "Jaune mousseux", image: "photo-mousseux.jpg", video: "video_mousseux.mp4", prices: "5g → 30€, 10g → 50€, 20g → 100€" },
   { name: "Filtrer X3 (Frozen)", image: "photo-filtrer.jpg", video: "video_filtrer.mp4", prices: "4g → 50€, 10g → 90€, 20g → 160€" },
   { name: "Taz Rolex", image: "taz-photo.jpg", video: "taz_video.mp4", prices: "5 taz → 30€, 10 taz → 50€" },
   { name: "Coke", image: "photo-coke.jpg", video: "video_coke.mp4", prices: "0.50g → 40€, 1g → 70€, 2g → 130€" },
@@ -138,21 +122,26 @@ function goTo(section) {
 function showDetail(index) {
   selectedProduct = products[index];
   document.getElementById('detail-name').innerText = selectedProduct.name;
-  document.getElementById('detail-image').src = selectedProduct.image;
 
-  // Promo description
-  const promoBox = document.getElementById('promo-description');
-  if (selectedProduct.promo) {
-    promoBox.style.display = 'block';
-    promoBox.innerHTML = "🎉 <strong>Offre spéciale valable jusqu’au 6 août !</strong><br>Profitez de packs ultra avantageux pour faire le plein à petit prix 💸🔥<br>Quantités limitées, ne rate pas ça.";
+  // vidéo
+  const videoEl = document.getElementById('detail-video');
+  const videoSrc = document.getElementById('video-source');
+  if (selectedProduct.video) {
+    videoEl.style.display = "block";
+    videoSrc.src = selectedProduct.video;
+    videoEl.load();
   } else {
-    promoBox.style.display = 'none';
-    promoBox.innerHTML = '';
+    videoEl.style.display = "none";
   }
 
+  // image
+  const imgEl = document.getElementById('detail-image');
+  imgEl.src = selectedProduct.image;
+  imgEl.style.display = "block";
+
+  // prix
   const priceOptions = document.getElementById('price-options');
   priceOptions.innerHTML = '';
-
   const prices = selectedProduct.prices.split(', ');
   prices.forEach(price => {
     const option = document.createElement('div');
