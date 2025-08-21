@@ -5,6 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Les Experts d'la Cali’t</title>
   <link rel="stylesheet" href="style.css"/>
+  <style>
+    .media-carousel {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    .media-carousel img,
+    .media-carousel video {
+      max-width: 100%;
+      display: none;
+      border-radius: 10px;
+      margin: 10px 0;
+    }
+    .media-carousel img.active,
+    .media-carousel video.active {
+      display: block;
+    }
+    .carousel-controls button {
+      margin: 5px;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 6px;
+      background: #222;
+      color: #fff;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .carousel-controls button:hover {
+      background: #444;
+    }
+  </style>
 </head>
 <body>
   <div class="header">
@@ -41,14 +71,18 @@
   <div id="product-detail" class="product-detail" style="display:none;">
     <h2 id="detail-name"></h2>
 
-    <!-- Vidéo -->
-    <video id="detail-video" controls>
-      <source id="video-source" src="" type="video/mp4">
-      Votre navigateur ne supporte pas la vidéo.
-    </video>
-
-    <!-- Image -->
-    <img id="detail-image" src="" alt="Produit" />
+    <!-- Carrousel image/vidéo -->
+    <div class="media-carousel">
+      <img id="detail-image" src="" alt="Produit" class="active"/>
+      <video id="detail-video" controls>
+        <source id="video-source" src="" type="video/mp4">
+        Votre navigateur ne supporte pas la vidéo.
+      </video>
+      <div class="carousel-controls">
+        <button onclick="switchMedia('image')">📷 Image</button>
+        <button onclick="switchMedia('video')">🎥 Vidéo</button>
+      </div>
+    </div>
 
     <div id="price-options" class="price-options"></div>
 
@@ -78,8 +112,8 @@
 <script>
 const products = [
   { name: "Jaune mousseux", image: "photo-mousseux.jpg", video: "video_mousseux.mp4", prices: "5g → 30€, 10g → 50€, 20g → 100€" },
-  { name: "Filtrer X3 (Runtz41)", image: "photo-runtz.jpg", video: "video_runtz.mp4", prices: "4g → 50€, 10g → 90€, 20g → 160€" },
-  { name: "Filtrer X3 (Gelato)", image: "photo-gelato.jpg", video: "video_gelato.mp4", prices: "4g → 50€, 10g → 90€, 20g → 160€" },
+  { name: "Filtrer X3 (Runtz41)", image: "photo-runtz.jpg", video: "video_runtz.mp4", prices: "5g → 50€, 10g → 90€, 20g → 160€" },
+  { name: "Filtrer X3 (Gelato)", image: "photo-gelato.jpg", video: "video_gelato.mp4", prices: "5g → 50€, 10g → 90€, 20g → 160€" },
   { name: "Taz Rolex", image: "taz-photo.jpg", video: "taz_video.mp4", prices: "5 taz → 30€, 10 taz → 50€" },
   { name: "Ice cream Cake", image: "photo-cream.jpg", video: "video_cream.mp4", prices: "2g → 50€, 4g → 100€, 10g → 200€, 20g → 380€" },
   { name: "Z41", image: "photo-z41.jpg", video: "video_z41.mp4", prices: "3g → 50€, 7g → 100€, 16g → 200€, 50g → 600€" }
@@ -103,21 +137,21 @@ function showDetail(index) {
   selectedProduct = products[index];
   document.getElementById('detail-name').innerText = selectedProduct.name;
 
+  // image par défaut
+  const imgEl = document.getElementById('detail-image');
+  imgEl.src = selectedProduct.image;
+  imgEl.classList.add("active");
+
   // vidéo
   const videoEl = document.getElementById('detail-video');
   const videoSrc = document.getElementById('video-source');
   if (selectedProduct.video) {
-    videoEl.style.display = "block";
     videoSrc.src = selectedProduct.video;
     videoEl.load();
+    videoEl.classList.remove("active");
   } else {
     videoEl.style.display = "none";
   }
-
-  // image
-  const imgEl = document.getElementById('detail-image');
-  imgEl.src = selectedProduct.image;
-  imgEl.style.display = "block";
 
   // prix
   const priceOptions = document.getElementById('price-options');
@@ -142,6 +176,21 @@ function showDetail(index) {
   document.querySelector('.products-grid').style.display = 'none';
   document.getElementById('infos').style.display = 'none';
   updateSnapchatLink();
+}
+
+function switchMedia(type) {
+  const image = document.getElementById('detail-image');
+  const video = document.getElementById('detail-video');
+
+  if (type === 'image') {
+    image.classList.add('active');
+    video.classList.remove('active');
+    video.pause();
+  } else {
+    image.classList.remove('active');
+    video.classList.add('active');
+    video.play();
+  }
 }
 
 function updateSnapchatLink() {
