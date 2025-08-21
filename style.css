@@ -12,15 +12,13 @@ body {
   padding: 10px;
 }
 
-/* Produits 2 par ligne */
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 produits par ligne */
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
   padding: 20px;
 }
 
-/* Carte produit */
 .product {
   background: #222;
   border-radius: 10px;
@@ -30,7 +28,6 @@ body {
   padding: 10px;
 }
 
-/* Image carrée */
 .product img {
   width: 100%;
   aspect-ratio: 1 / 1;
@@ -38,34 +35,23 @@ body {
   border-radius: 10px;
 }
 
-/* Titre produit */
 .product h3 {
   margin: 10px 0 0 0;
   font-size: 1rem;
 }
 
-/* Détail produit */
 .product-detail {
   display: none;
   padding: 20px;
+  text-align: center;
 }
 
-/* Image ou vidéo dans le détail */
-.media-carousel img,
-.media-carousel video {
+#detail-image,
+#detail-video {
   width: 100%;
   max-width: 400px;
   border-radius: 10px;
-  display: none;
-}
-
-.media-carousel img.active,
-.media-carousel video.active {
-  display: block;
-}
-
-.carousel-controls {
-  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .price-options {
